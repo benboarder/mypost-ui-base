@@ -6,7 +6,6 @@ Created for internal use; with the official `debian:jessie` distro.
 
 Numerous containers have been compiled into a single `Dockerfile` script for ease-of-use.
 Includes snippets from the following:
-
 ```
 debian:jessie
 buildpack-deps:jessie
@@ -17,7 +16,7 @@ node:8
 
 To locally build a tagged container from the `Dockerfile` run:
 ```
-docker build --tag benboarder/mypost-ui-base:latest .
+docker build -t benboarder/mypost-ui-base:latest .
 ```
 
 To use the latest version run:

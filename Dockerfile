@@ -1,5 +1,14 @@
 FROM debian:jessie
 
+LABEL name="mypost-ui-base" \
+      maintainer="DDCTeamWookie <DLDDCTeamWookie@auspost.com.au>" \
+      version="1.0" \
+      description="The base docker container for MyPost Consumer UI builds"
+
+ENV TZ="/usr/share/zoneinfo/Australia/Melbourne"
+ENV LANG C.UTF-8
+ENV NPM_CONFIG_LOGLEVEL warn
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
