@@ -27,14 +27,13 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | apt-key add
   && rm /etc/apt/sources.list.d/google-chrome.list \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
-RUN chown -R node /usr/local/lib /usr/local/include /usr/local/share /usr/local/bin \
-    && (cd "$USER_HOME_DIR"; su node -c "npm i -g @angular/cli@$NG_CLI_VERSION; npm i -g yarn; npm i -g gyp node-gyp; npm cache clean --force")
-
 RUN groupadd -g 10101 bamboo \
   && useradd bamboo --shell /bin/bash --create-home -u 10101 -g 10101 \
   && usermod -a -G sudo bamboo \
+  && chown -R bamboo /usr/local/lib /usr/local/include /usr/local/share /usr/local/bin \
   && echo 'ALL ALL = (ALL) NOPASSWD: ALL' >> /etc/sudoers \
-  && echo 'bamboo:nopassword' | chpasswd
+  && echo 'bamboo:nopassword' | chpasswd \
+  && (cd "$USER_HOME_DIR"; su bamboo -c "npm i -g @angular/cli@$NG_CLI_VERSION; npm i -g yarn; npm i -g gyp node-gyp; npm cache clean --force")
 
 RUN mkdir /data && chown -R bamboo:bamboo /data
 
